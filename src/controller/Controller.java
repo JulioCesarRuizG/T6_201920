@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 import model.logic.MVCModelo;
@@ -16,8 +17,9 @@ public class Controller {
 	/**
 	 * Crear la vista y el modelo del proyecto
 	 * @param capacidad tamaNo inicial del arreglo
+	 * @throws FileNotFoundException 
 	 */
-	public Controller ()
+	public Controller () throws FileNotFoundException
 	{
 		view = new MVCView();
 		modelo = new MVCModelo();

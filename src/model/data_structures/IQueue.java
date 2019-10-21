@@ -33,6 +33,6 @@ public interface IQueue<T>{
 	 * Convierte la cola de objetos en un iterator
 	 * @return cola de objetos iterables
 	 */
-	public Iterador<T> iterator();
+	public Iterator<T> iterator();
 
 }

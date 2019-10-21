@@ -2,19 +2,21 @@ package test.data_structures;
 
 import static org.junit.Assert.*;
 
+import java.util.Iterator;
+
 import org.junit.Before;
 import org.junit.Test;
 
 import model.data_structures.ArbolRN;
 import model.data_structures.Iterador;
 
-public class TestArbolRN<K extends Comparable<K>, V> {
+public class TestArbolRN {
 	
-	private ArbolRN arbol;
+	private ArbolRN<Integer, String> arbol;
 	@Before
 	public void setUp1()
 	{
-		arbol = new ArbolRN<K, V>();
+		arbol = new ArbolRN<Integer, String>();
 		arbol.put(1, "uno");
 		arbol.put(2, "dos");
 		arbol.put(3, "tres");
@@ -101,14 +103,12 @@ public class TestArbolRN<K extends Comparable<K>, V> {
 	public void TestKeys()
 	{
 		setUp1();
-		try
-		{
-			Iterador<K> it =(Iterador<K>) arbol.keys(1,5);
-			assertEquals("No es el elemento esperado", 1, it.Next());
-		}
-		catch (Exception e) {
-			fail("Error al ejecutar el método keys");
-		}
+	
+			Iterator<Integer> it = arbol.keys().iterator();
+			System.out.println(it.next().intValue());
+			assertEquals("No es el elemento esperado", 2, it.next().intValue());
+		
+		
 	}
 	
 }

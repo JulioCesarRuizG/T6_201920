@@ -5,7 +5,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-public class Queue<T> implements IQueue{
+public class Queue<T> implements Iterable<T>, IQueue{
 
 	private Node primero;
 	private Node ultimo;
@@ -17,7 +17,7 @@ public class Queue<T> implements IQueue{
 	{
 		primero = pPrimero;
 		Node actual = primero;
-		while(actual.darSiguiente() != null)
+		while(actual!=null&&actual.darSiguiente() != null)
 		{
 			actual = actual.darSiguiente();
 		}
@@ -29,8 +29,9 @@ public class Queue<T> implements IQueue{
 	 * @return primer viaje
 	 */
 	public T darPrimero()
-	{
+	{   if(primero!=null)
 		return (T) primero.darItem();
+	else return null;
 	}
 	public Node darContenedorPrimero()
 	{
@@ -48,7 +49,9 @@ public class Queue<T> implements IQueue{
 	 */
 	public T darUltimo()
 	{
-		return (T) ultimo.darItem();
+		  if(ultimo!=null)
+				return (T) ultimo.darItem();
+			else return null;
 	}
 
 	/**
@@ -144,22 +147,26 @@ public class Queue<T> implements IQueue{
 		return actual;
 	}
 
-	/**
-	 * Convierte la cola de objetos en un iterator
-	 * @return cola de objetos iterables
-	 */
-	public Iterador iterator() {
-		Node actual = primero;
-		T[] todas = null;
-		int lugar = 0;
-		while(actual != null)
-		{
-			todas[lugar] = (T) actual.darItem();
-			lugar++;
-			actual = actual.darSiguiente();
-		}
-		Iterador it = new Iterador(todas);
-		return it;
-	}
+	 @Override
+	    public Iterator<T> iterator() {
+	        Iterator<T> it = new Iterator<T>() {
+
+	            private int currentIndex = 0;
+                private Queue<T> aux= new Queue<T>(primero);
+	            @Override
+	            public boolean hasNext() {
+	                return currentIndex < size() && aux.primero != null;
+	            }
+
+	            @Override
+	            public T next() {
+	            	currentIndex++;
+	                return aux.deQueue();
+	            }
+
+	         
+	        };
+	        return it;
+	    }
 
 }

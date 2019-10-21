@@ -394,8 +394,8 @@ public class ArbolRN <K extends Comparable<K>, V>{
 		if (isEmpty())
 			return null;
 		return keys(min(), max());
-	}
 
+	}
 
 	public Iterable<K> keys(K lo, K hi) {
 		if (lo == null) 
@@ -405,7 +405,7 @@ public class ArbolRN <K extends Comparable<K>, V>{
 
 		Queue<K> queue = new Queue<K>(null);
 		keys(root, queue, lo, hi);
-		return (Iterable<K>) queue;
+		return  queue;
 	} 
 
 	private void keys(NodoArbol nodo, Queue<K> queue, K lo, K hi) { 
